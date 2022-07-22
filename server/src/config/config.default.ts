@@ -6,4 +6,15 @@ export default {
   koa: {
     port: 7001,
   },
+  mongoose: {
+    client: {
+      uri: 'mongodb://152.136.209.249:27017',
+      options: {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        user: 'dun',
+        pass: '721210'
+      }
+    },
+  },
 } as MidwayConfig;
