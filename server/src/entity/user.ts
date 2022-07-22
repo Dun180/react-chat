@@ -4,6 +4,7 @@ import { EntityModel} from "@midwayjs/typegoose";
 @EntityModel()
 export class User {
 
+  public _id?: string;
 
   @prop()
   public username?: string;
@@ -13,4 +14,5 @@ export class User {
 
   @prop()
   public name?: string;
+
 }

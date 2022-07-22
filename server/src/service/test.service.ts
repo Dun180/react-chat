@@ -11,10 +11,15 @@ export class TestService {
 
   async getTest(){
     // create data
-    const { _id: id } = await this.userModel.create({ name: 'JohnDoe', username: 'root', password: '123' } as User); // an "as" assertion, to have types for all properties
-
+    const res = await this.userModel.create({ name: 'JohnDoe2', username: 'root2', password: '123' } as User); // an "as" assertion, to have types for all properties
+    console.log(res)
     // find data
-    const user = await this.userModel.findById(id).exec();
-    console.log(user)
+    // const user = await this.userModel.findById(id).exec();
+
+    const user2 = await this.userModel.find({username:'root1',password:'123'}).exec();
+    // console.log(user)
+    console.log(user2)
+
+
   }
 }

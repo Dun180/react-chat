@@ -14,7 +14,11 @@ export default {
         useUnifiedTopology: true,
         user: 'dun',
         pass: '721210'
-      }
+      },
     },
+  },
+  jwt: {
+    secret: 'f4e2e52034348f86b67cde581c0f9eb6', // fs.readFileSync('xxxxx.key')
+    expiresIn: '2d', // https://github.com/vercel/ms
   },
 } as MidwayConfig;

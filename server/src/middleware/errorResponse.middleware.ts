@@ -9,11 +9,11 @@ export class ErrorResponseMiddleware implements IMiddleware<Context, NextFunctio
       try {
         await next();
       } catch (error) {
-        // ctx.body = getReturnValue(
-        //   false,
-        //   null,
-        //   error.message || '系统发生错误，请联系管理员'
-        // );
+        ctx.body = {
+          code: 500,
+          msg: error.message || '系统发生错误，请联系管理员'
+        }
+
       }
     };
   }
