@@ -51,7 +51,8 @@ export class JwtMiddleware {
   public match(ctx: Context): boolean {
     const ignore =
       ctx.path.indexOf('/login') !== -1 ||
-      ctx.path.indexOf('/register') !== -1
+      ctx.path.indexOf('/register') !== -1 ||
+      ctx.path.indexOf('/') !== -1
     ;
     return !ignore;
   }

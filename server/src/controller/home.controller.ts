@@ -1,5 +1,6 @@
 import {Controller, Get, Inject} from '@midwayjs/decorator';
 import { TestService} from "../service/test.service";
+import { Result } from '../common/result'
 
 @Controller('/')
 export class HomeController {
@@ -8,8 +9,9 @@ export class HomeController {
   testService: TestService
 
   @Get('/')
-  async home(): Promise<string> {
-    await this.testService.getTest()
-    return 'Hello Midwayjs!';
+  async home() {
+    // await this.testService.getTest()
+    // return 'Hello Midwayjs!'
+    return Result.succ('Hello Midwayjs!');
   }
 }
