@@ -37,8 +37,14 @@ export class LoginController {
   }
 
   @Post('/register')
-  async register(@Body() user: User): Promise<object> {
-    user.password = Md5Util.hex_md5(user.username+user.password)
+  async register(
+    @Body('username') username: string,
+    @Body('password') password: string
+  ): Promise<object> {
+    password = Md5Util.hex_md5(username+password)
+    const user = new User();
+    user.username = username;
+    user.password = password;
     const res = await this.userService.register(user)
     if (res) {
       return Result.succ(null)
