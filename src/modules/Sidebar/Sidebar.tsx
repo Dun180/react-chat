@@ -1,18 +1,34 @@
 import React, { useState } from 'react';
 import style from './Sidebar.module.scss'
-import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
+import { UserOutlined, LogoutOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import { Avatar, Badge, Modal, Button, Tabs, Form, Input, message } from 'antd';
-import { useSelector } from "react-redux";
-import {login, test} from "@/lib/api";
+import {useDispatch, useSelector} from "react-redux";
 import Login from '@/modules/Sidebar/Login/Login'
 import UserInfo from "@/modules/Sidebar/UserInfo/UserInfo";
+import {REMOVE_TOKEN} from "@/store/reducers/token";
+import {REMOVE_USERINFO} from "@/store/reducers/userInfo";
 const Sidebar = () => {
     const userInfo = useSelector((state: any) => state.userInfo)
     const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
     const [isUserInfoModalVisible, setIsUserInfoModalVisible] = useState(false);
     const [loginLoading, setLoginLoading] = useState(false);
     const [userInfoLoading, setUserInfoLoading] = useState(false);
+    const dispatch = useDispatch();
 
+    const { confirm } = Modal;
+
+    const logout = () => {
+        confirm({
+            title: '确定要退出吗?',
+            icon: <ExclamationCircleOutlined />,
+            onOk() {
+                dispatch(REMOVE_TOKEN())
+                dispatch(REMOVE_USERINFO())
+            },
+            onCancel() {
+            },
+        });
+    };
     const showLoginModal = () => {
         setIsLoginModalVisible(true);
     };
@@ -40,7 +56,6 @@ const Sidebar = () => {
         setIsUserInfoModalVisible(false);
     };
     const handleClickAvatar = () => {
-        console.log(userInfo.value)
         if (userInfo.value === ''){
             showLoginModal()
         }else {
@@ -57,7 +72,7 @@ const Sidebar = () => {
                 </Badge>
             </div>
 
-            <LogoutOutlined className={style.icon}/>
+            <LogoutOutlined className={style.icon} onClick={logout}/>
             <Modal
                 title=""
                 visible={isLoginModalVisible}
