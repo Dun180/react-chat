@@ -6,6 +6,13 @@ export default {
   koa: {
     port: 7001,
   },
+  socketIO: {
+    path: '/testPath',
+    cors: {
+      origin: '*',
+      methods: ["GET", "POST"]
+    }
+  },
   mongoose: {
     client: {
       uri: 'mongodb://152.136.209.249:27017',
