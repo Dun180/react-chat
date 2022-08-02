@@ -26,3 +26,11 @@ export async function register(data: any){
 export const fetchTest = async () => {
     return await fetch('data',  '09')
 }
+
+export const loginEvent = async (id: string) => {
+    return await fetch('login',id)
+}
+
+export const sendMsg = async (id: string, content: string) => {
+    return await fetch('sendMsg',{from:'123',to:'content',type:'text'})
+}

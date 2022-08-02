@@ -1,5 +1,5 @@
 import IO from 'socket.io-client';
-const socket = IO('http://127.0.0.1:7001/hello',{path: '/testPath'});
+const socket = IO('http://127.0.0.1:7001/message',{path: '/testPath'});
 
 const data2: { name: any; xx: any; id: any; fj: any; }[] = []
 socket.on('data', msg => {
@@ -23,6 +23,10 @@ socket.on('disconnect', () => {
     console.log(socket.connected) // false
 })
 
+socket.on('sendMsg', (data) => {
+    console.log('sendMsg')
+    console.log(data)
+})
 socket.connect()
 
 export default socket

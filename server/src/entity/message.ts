@@ -7,7 +7,7 @@ import mongoose from "mongoose";
 @EntityModel()
 export class Message {
 
-  public _id: mongoose.Types.ObjectId;
+  public _id?: mongoose.Types.ObjectId;
   /**
    * 发送者
    */

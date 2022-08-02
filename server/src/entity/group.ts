@@ -6,7 +6,7 @@ import {User} from "./user";
 @EntityModel()
 export class Group {
 
-  public _id: mongoose.Types.ObjectId;
+  public _id?: mongoose.Types.ObjectId;
 
   /**
    * 创建者

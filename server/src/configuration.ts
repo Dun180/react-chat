@@ -6,6 +6,7 @@ import * as info from '@midwayjs/info';
 import { join } from 'path';
 import * as typegoose from '@midwayjs/typegoose';
 import * as jwt from '@midwayjs/jwt';
+import * as cache from '@midwayjs/cache';
 // import { DefaultErrorFilter } from './filter/default.filter';
 // import { NotFoundFilter } from './filter/notfound.filter';
 import { ReportMiddleware } from './middleware/report.middleware';
@@ -20,6 +21,7 @@ import { JwtMiddleware } from "./middleware/jwt.middleware";
     typegoose,
     jwt,
     socketio,
+    cache,
     {
       component: info,
       enabledEnvironment: ['local'],

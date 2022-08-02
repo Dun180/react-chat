@@ -37,4 +37,8 @@ export class UserService {
       return false;
     }
   }
+
+  async selectOne(id: string) {
+    return this.userModel.findOne({id: id}).exec();
+  }
 }

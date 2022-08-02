@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { Route, useNavigate  } from "react-router-dom";
 import style from './Login.module.scss';
 import {Button, Form, Input, message, Tabs} from "antd";
-import {login, register} from "@/lib/api";
+import {login, loginEvent, register} from "@/lib/api";
 import {useDispatch, useSelector} from "react-redux";
 import {SET_USERINFO} from "../../../store/reducers/userInfo"
 import {SET_TOKEN} from "@/store/reducers/token";
@@ -25,6 +25,7 @@ const Login = (props:any) => {
             const token = resp.headers['authorization']
             const userInfo = resp.data.data
             message.success('登录成功');
+            await loginEvent(userInfo.id)
             // navigate('/')
             props.close()
             dispatch(SET_USERINFO(userInfo))

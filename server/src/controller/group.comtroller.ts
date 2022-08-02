@@ -10,7 +10,7 @@ export class GroupController {
 
   @Post('/add')
   async addGroup(@Body() group: Group){
-    return this.groupService.add(group)
+    return this.groupService.insert(group)
   }
 
 }

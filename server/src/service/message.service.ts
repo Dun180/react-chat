@@ -9,7 +9,7 @@ export class MessageService {
   @InjectEntityModel(Message)
   messageModel: ReturnModelType<typeof Message>;
 
-  async add(message: Message) {
-    return await this.messageModel.create(message)
+  async insert(message: Message) {
+    return await this.messageModel.create(message);
   }
 }

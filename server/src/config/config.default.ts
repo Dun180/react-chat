@@ -28,4 +28,11 @@ export default {
     secret: 'f4e2e52034348f86b67cde581c0f9eb6', // fs.readFileSync('xxxxx.key')
     expiresIn: '2d', // https://github.com/vercel/ms
   },
+  cache: {
+    store: 'memory',
+    options: {
+      max: 100,
+      ttl: null,      // 修改默认的ttl配置
+    },
+  },
 } as MidwayConfig;

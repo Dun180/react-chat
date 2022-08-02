@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 @EntityModel()
 export class User {
 
-  public _id: mongoose.Types.ObjectId;
+  public _id?: mongoose.Types.ObjectId;
 
   /**
    * 用户名
