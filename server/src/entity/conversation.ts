@@ -12,14 +12,14 @@ export class Conversation {
   /**
    * 用户id
    */
-  @prop({ index: true, required: true})
-  public user?: string;
+  @prop({ ref: () => User, index: true, required: true})
+  public user?: Ref<User>;
 
   /**
    * 联系人
    */
   @prop({ref: () => User})
-  public linkman?: Ref<User>;
+  public contact?: Ref<User>;
 
   /**
    * 群组

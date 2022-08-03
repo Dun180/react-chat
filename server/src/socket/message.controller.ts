@@ -12,6 +12,7 @@ import * as assert from 'assert';
 import {OnWSDisConnection} from "@midwayjs/decorator/dist/decorator/ws/webSocketEvent";
 import {SocketService} from "../service/socket.service";
 import {MessageService} from "../service/message.service";
+import {ConversationService} from "../service/conversation.service";
 
 
 @WSController('/message')
@@ -35,6 +36,9 @@ export class MessageController {
   @Inject()
   messageService: MessageService;
 
+  @Inject()
+  conversationService: ConversationService;
+
   @OnWSConnection()
   async onConnectionMethod() {
     console.log('on client connect', this.ctx.id);
@@ -55,6 +59,8 @@ export class MessageController {
   async sendMsg(msg: Message) {
     const { to, content } = msg;
     const { type } = msg;
+
+    //判断信息是发给个人还是群聊，并进行数据校验
 
     let toGroup: Group | null = null;
     let toUser: User | null = null;
@@ -78,16 +84,35 @@ export class MessageController {
     const user = await this.userService.selectOne(msg.from.toString())
     assert(user,'用户不存在')
 
+    //插入数据库
     const message = await this.messageService.insert(msg)
 
-    if (toGroup) {
 
+    //根据发送的对象不同进行不同处理
+    if (toGroup) {
+      //更新会话列表
+      await this.conversationService.insert(
+        {
+          user: message.from,
+          group: new mongoose.Types.ObjectId(msg.to),
+          message: user.name + ':' + message.content
+        })
+      //群发消息
+      //ToDo
     }else if (toUser) {
+      //更新会话列表
+      await this.conversationService.insert(
+        {
+          user: message.from,
+          contact: toUser._id,
+          message: message.content
+        })
+
+      //发送消息
       const target = await this.cacheManager.get(message.to)
       this.ctx.to(target.toString()).emit('sendMsg',message)
     }
     console.log(msg)
 
-    // this.ctx.to(result).emit('sendMsg', data)
   }
 }

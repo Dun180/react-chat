@@ -15,6 +15,6 @@ export class GroupService {
   }
 
   async selectOne(id: mongoose.Types.ObjectId) {
-    return this.groupModel.findOne({_id: id}).exec();
+    return await this.groupModel.findOne({_id: id}).exec();
   }
 }

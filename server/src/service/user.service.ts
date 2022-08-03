@@ -23,7 +23,7 @@ export class UserService {
         password: user.password
       } as User);
       if (createRes !== null){
-        const updateRes = await this.userModel.updateOne({_id:createRes._id},{ $set:{name:'用户'+createRes._id.toString().substring(20,22)}}).exec()
+        const updateRes = await this.userModel.updateOne({_id:createRes._id},{ $set:{name:'用户'+createRes._id.toString().substring(22,24)}}).exec()
         if (updateRes.modifiedCount > 0){
           return true
         }else {
@@ -39,6 +39,11 @@ export class UserService {
   }
 
   async selectOne(id: string) {
-    return this.userModel.findOne({id: id}).exec();
+    return await this.userModel.findOne({id: id}).exec();
+  }
+
+  async selectByName(name: string) {
+    const regexpName =  new RegExp(name, 'i');
+    return await this.userModel.find({name: regexpName}).exec();
   }
 }

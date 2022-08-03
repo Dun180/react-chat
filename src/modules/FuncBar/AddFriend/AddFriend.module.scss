@@ -1,0 +1,36 @@
+.tab_container {
+  display: flex;
+  flex-direction: column;
+}
+.form {
+  display: flex;
+  width: 100%;
+  .input {
+    width: 380px;
+  }
+}
+.result_box {
+  height: 250px;
+  overflow: auto;
+  .box_row {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+    .item {
+      width: 142px;
+      display: flex;
+      flex-direction: row;
+      margin-right: 15px;
+      .avatar {
+      }
+
+      .info {
+        margin-left: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        overflow: hidden;
+      }
+    }
+  }
+}

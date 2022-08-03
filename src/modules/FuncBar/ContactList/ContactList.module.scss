@@ -1,0 +1,53 @@
+.contact_list {
+}
+
+
+
+.list {
+
+}
+
+.contact {
+  height: 70px;
+  background-color: rgba(255, 255, 255, 0.62);
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.contact:hover {
+  background-color: rgba(255, 255, 255, 0.45);
+}
+
+.avatar {
+}
+
+.info {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.info_top {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.info_name {
+
+}
+
+.info_time {
+  margin-left: auto;
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.34);
+}
+
+.info_message {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.47);
+}

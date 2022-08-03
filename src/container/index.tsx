@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './index.module.scss'
 import Sidebar from '../modules/Sidebar/Sidebar';
-import FuncBar from "../modules/FuncBar/Func";
+import FuncBar from "../modules/FuncBar/FuncBar";
 import Chat from "../modules/Chat/Chat";
 const App = () => {
     console.log(style)

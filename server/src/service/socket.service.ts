@@ -14,10 +14,10 @@ export class SocketService {
   }
 
   async deleteById(id: string) {
-    return this.socketModel.deleteOne({id: id}).exec();
+    return await this.socketModel.deleteOne({id: id}).exec();
   }
 
   async selectOne(id: string) {
-    return this.socketModel.findOne({id: id}).exec();
+    return await this.socketModel.findOne({id: id}).exec();
   }
 }
