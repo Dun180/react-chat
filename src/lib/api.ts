@@ -2,6 +2,8 @@ import http from "@/utils/http";
 import {Result, Response} from "@/models/result";
 import axios from "axios";
 import fetch from "@/utils/fetch";
+import exp from "constants";
+import {Friend} from "@/models/interface";
 
 //#region axios
 
@@ -9,7 +11,7 @@ export async function test() {
     return await http.get<Result<Object>>('/')
 }
 
-export async function login(form: any) {
+export const login = async (form: any) => {
     return new Promise<Response>(async (resolve, reject) => {
         await axios.post('/login', form)
             .then((res) => {
@@ -21,12 +23,16 @@ export async function login(form: any) {
     })
 }
 
-export async function register(data: any) {
+export const register = async (data: any) => {
     return await http.post<Result<Object>>('/register',data)
 }
 
-export async function queryUser(name: string) {
+export const queryUser = async (name: string) => {
     return await http.get<Result<Object[]>>('/user/query',name)
+}
+
+export const addFriend = async (data: Friend) => {
+    return await http.post<Result<Object>>('/friend/add',data)
 }
 
 

@@ -15,12 +15,12 @@ export default {
   },
   mongoose: {
     client: {
-      uri: 'mongodb://152.136.209.249:27017',
+      uri: 'mongodb://152.136.209.249:27017/test',
       options: {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        user: 'dun',
-        pass: '721210'
+        user: 'test',
+        pass: 'test'
       },
     },
   },

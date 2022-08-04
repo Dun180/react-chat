@@ -1,19 +1,22 @@
-import {Controller, Get, Inject, Query} from "@midwayjs/decorator";
-import {ConversationService} from "../service/conversation.service";
+import {Body, Controller, Get, Inject, Post, Query} from "@midwayjs/decorator";
 import mongoose from "mongoose";
+import {FriendService} from "../service/friend.service";
+import {Friend} from "../entity/friend";
 import {Result} from "../common/result";
 
-@Controller('/conversation')
-export class ConversationController {
+@Controller('/friend')
+export class FriendController {
 
   @Inject()
-  conversationService:ConversationService;
+  friendService: FriendService;
 
-
+  @Post('/add')
+  async addFriend(@Body() friend: Friend){
+    return Result.succ(await this.friendService.insert(friend))
+  }
 
   @Get('/query')
-  async queryConversation(@Query('id') id){
-
-    return Result.succ(await this.conversationService.selectById(new mongoose.Types.ObjectId(id)))
+  async queryFriend(@Query('id') id){
+    return Result.succ(await this.friendService.selectById(new mongoose.Types.ObjectId(id)))
   }
 }
