@@ -40,7 +40,7 @@ const AddFriend = () => {
     }
 
     const onUserFinish = async (values: any) => {
-        const resp = await queryUser(values)
+        const resp = await queryUser(values.name)
         console.log(resp)
         if(resp.code === 200) {
             if (resp.data.length > 0) {

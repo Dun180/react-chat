@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import style from './Sidebar.module.scss'
-import { UserOutlined, LogoutOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
+import { UserOutlined, LogoutOutlined, ExclamationCircleOutlined, MessageOutlined, TeamOutlined } from '@ant-design/icons';
 import { Avatar, Badge, Modal, Button, Tabs, Form, Input, message } from 'antd';
 import {useDispatch, useSelector} from "react-redux";
-import Login from '@/modules/Sidebar/Login/Login'
-import UserInfo from "@/modules/Sidebar/UserInfo/UserInfo";
+import Login from '@/views/Sidebar/Login/Login'
+import UserInfo from "@/views/Sidebar/UserInfo/UserInfo";
 import {REMOVE_TOKEN} from "@/store/reducers/token";
 import {REMOVE_USERINFO} from "@/store/reducers/userInfo";
+import {useNavigate} from "react-router-dom";
 const Sidebar = () => {
     const userInfo = useSelector((state: any) => state.userInfo)
     const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
@@ -14,9 +15,12 @@ const Sidebar = () => {
     const [loginLoading, setLoginLoading] = useState(false);
     const [userInfoLoading, setUserInfoLoading] = useState(false);
     const dispatch = useDispatch();
-
+    const navigate = useNavigate()
     const { confirm } = Modal;
 
+    const routeJump = (path: string) => {
+        navigate(path)
+    }
     const logout = () => {
         confirm({
             title: '确定要退出吗?',
@@ -71,8 +75,9 @@ const Sidebar = () => {
                     <Avatar size={64} icon={<UserOutlined />} />
                 </Badge>
             </div>
-
-            <LogoutOutlined className={style.icon} onClick={logout}/>
+            <MessageOutlined className={style.icon_top} onClick={() => routeJump('conversation')}/>
+            <TeamOutlined className={style.icon_top} onClick={() => routeJump('contact')}/>
+            <LogoutOutlined className={style.icon_bottom} onClick={logout}/>
             <Modal
                 title=""
                 visible={isLoginModalVisible}

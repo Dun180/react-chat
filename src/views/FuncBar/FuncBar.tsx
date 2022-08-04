@@ -3,7 +3,7 @@ import style from './FuncBar.module.scss'
 import { Outlet } from "react-router-dom"
 import {PlusOutlined} from "@ant-design/icons";
 import {Modal} from "antd";
-import AddFriend from "@/modules/FuncBar/AddFriend/AddFriend";
+import AddFriend from "@/views/FuncBar/AddFriend/AddFriend";
 
 const FuncBar = () => {
     const [isModalVisible, setIsModalVisible] = useState(false);

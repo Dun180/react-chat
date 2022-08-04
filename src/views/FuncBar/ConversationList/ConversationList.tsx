@@ -1,13 +1,15 @@
-import React from "react";
-import style from "./ContactList.module.scss"
-import { Avatar } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
+import React, {useState} from "react";
+import style from './ConversationList.module.scss'
+import {Avatar} from "antd";
+import {UserOutlined} from "@ant-design/icons";
 
-const ContactList = () => {
+
+const ConversationList = () => {
+
     return (
-        <div className={style.contact_list}>
+        <div className={style.conversation_list}>
             <div className={style.list}>
-                <div className={style.contact}>
+                <div className={style.conversation}>
                     <Avatar className={style.avatar} size={50} icon={<UserOutlined />} />
                     <div className={style.info}>
                         <div className={style.info_top}>
@@ -24,7 +26,7 @@ const ContactList = () => {
                         </div>
                     </div>
                 </div>
-                <div className={style.contact}>
+                <div className={style.conversation}>
                     <Avatar className={style.avatar} size={50} icon={<UserOutlined />} />
                     <div className={style.info}>
                         <div className={style.info_top}>
@@ -47,4 +49,4 @@ const ContactList = () => {
     )
 }
 
-export default ContactList
+export default ConversationList

@@ -1,7 +1,8 @@
-import {Controller, Get, Inject, Query} from "@midwayjs/decorator";
+import {Body, Controller, Get, Inject, Post, Query} from "@midwayjs/decorator";
 import {ConversationService} from "../service/conversation.service";
 import mongoose from "mongoose";
 import {Result} from "../common/result";
+import {Conversation} from "../entity/conversation";
 
 @Controller('/conversation')
 export class ConversationController {
@@ -9,7 +10,10 @@ export class ConversationController {
   @Inject()
   conversationService:ConversationService;
 
-
+  @Post('/add')
+  async addConversation(@Body() conversation: Conversation) {
+    return Result.succ(await this.conversationService.insert(conversation))
+  }
 
   @Get('/query')
   async queryConversation(@Query('id') id){

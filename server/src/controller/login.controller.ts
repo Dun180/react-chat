@@ -33,7 +33,7 @@ export class LoginController {
     this.ctx.set('Authorization', token);
     this.ctx.set('Access-control-Expose-Headers', "Authorization");
 
-    return Result.succ({id:res._id, name:res.name})
+    return Result.succ({_id:res._id, name:res.name})
   }
 
   @Post('/register')

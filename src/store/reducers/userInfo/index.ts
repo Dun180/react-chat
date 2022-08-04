@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {UserInfo} from "@/models/interface";
+import {User} from "@/models/interface";
 
 const userInfo = createSlice({
     name: 'userInfo',

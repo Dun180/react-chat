@@ -8,9 +8,9 @@
 }
 
 .contact {
-  height: 70px;
+  height: 50px;
   background-color: rgba(255, 255, 255, 0.62);
-  padding: 10px;
+  padding: 15px;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -18,7 +18,7 @@
 }
 
 .contact:hover {
-  background-color: rgba(255, 255, 255, 0.45);
+  background-color: rgba(0, 0, 0, 0.09);
 }
 
 .avatar {
@@ -31,23 +31,8 @@
   flex: 1;
 }
 
-.info_top {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-}
-
 .info_name {
 
 }
 
-.info_time {
-  margin-left: auto;
-  font-size: 13px;
-  color: rgba(0, 0, 0, 0.34);
-}
 
-.info_message {
-  font-size: 12px;
-  color: rgba(0, 0, 0, 0.47);
-}

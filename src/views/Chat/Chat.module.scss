@@ -1,0 +1,23 @@
+.chat_container {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.chat_box {
+  display: flex;
+  flex-direction: column;
+}
+
+.chat_top {
+  height: 60px;
+  border-bottom: 1px solid rgba(192, 192, 192, 0.38);
+}
+
+.chat_content {
+  height: 360px;
+  border-bottom: 1px solid rgba(192, 192, 192, 0.38);
+}
+
+.chat_input {
+  flex: 1
+}
