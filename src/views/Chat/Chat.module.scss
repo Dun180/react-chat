@@ -6,6 +6,7 @@
 .chat_box {
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .chat_top {
@@ -16,8 +17,21 @@
 .chat_content {
   height: 360px;
   border-bottom: 1px solid rgba(192, 192, 192, 0.38);
+  overflow: auto;
+
 }
 
 .chat_input {
-  flex: 1
+  overflow: auto;
+
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.chat_submit {
+  display: flex;
+  justify-content: flex-end;
+  margin: auto 10px 10px 0;
 }

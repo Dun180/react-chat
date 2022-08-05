@@ -3,7 +3,7 @@ import {Result, Response} from "@/models/result";
 import axios from "axios";
 import fetch from "@/utils/fetch";
 import exp from "constants";
-import {Conversation, Friend, User} from "@/models/interface";
+import {Conversation, Friend, Message, User} from "@/models/interface";
 
 //#region axios
 
@@ -40,7 +40,16 @@ export const queryFriend = async (id: string) => {
 }
 
 export const addConversation = async (data: Conversation) => {
-    return await http.post<Result<Object>>('/conversation/add',data)
+    return await http.post<Result<Conversation>>('/conversation/add',data)
+}
+
+export const queryConversation = async (id: string) => {
+    return await http.get<Result<Conversation[]>>('/conversation/query', {id: id})
+}
+
+export const queryMessage = async (to: string) => {
+    return await http.get<Result<Message[]>>('/message/query', {to: to})
+
 }
 //#endregion
 
@@ -53,7 +62,7 @@ export const loginEvent = async (id: string) => {
     return await fetch('login', id)
 }
 
-export const sendMsg = async (id: string, content: string) => {
-    return await fetch('sendMsg',{from: '123', to: 'content', type: 'text'})
+export const sendMsg = async (msg: Message) => {
+    return await fetch('sendMsg',msg)
 }
 //#endregion

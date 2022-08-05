@@ -27,7 +27,7 @@ const AddFriend = () => {
 
     const handleAddFriend = async (to: string) => {
         console.log(userInfo)
-        const data = {from: userInfo.id, to: to}
+        const data = {from: userInfo._id, to: to}
         const resp = await addFriend(data)
         if (resp.code === 200) {
             console.log(resp)

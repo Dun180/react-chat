@@ -52,6 +52,7 @@ export class MessageController {
 
   @OnWSMessage('login')
   async login(data) {
+    await this.socketService.updateUser(this.ctx.id, data)
     await this.cacheManager.set(data, this.ctx.id);
   }
 
@@ -59,7 +60,6 @@ export class MessageController {
   async sendMsg(msg: Message) {
     const { to, content } = msg;
     const { type } = msg;
-
     //判断信息是发给个人还是群聊，并进行数据校验
 
     let toGroup: Group | null = null;
@@ -70,7 +70,7 @@ export class MessageController {
     }else {
       const socket = await this.socketService.selectOne(this.ctx.id)
       assert(socket, '连接错误')
-      const userId = msg.to.replace(socket.user.toString(), '');
+      const userId = msg.to.replace(socket.user?.toString(), '');
       assert(isValid(userId), '无效的用户ID');
       toUser = await this.userService.selectOne(userId);
       assert(toUser, '用户不存在');
@@ -91,28 +91,40 @@ export class MessageController {
     //根据发送的对象不同进行不同处理
     if (toGroup) {
       //更新会话列表
-      await this.conversationService.insert(
+      await this.conversationService.insertOrUpdate(
         {
           user: message.from,
-          group: new mongoose.Types.ObjectId(msg.to),
-          message: user.name + ':' + message.content
+          to: message.to,
+          message: user.name + ': ' + message.content
         })
       //群发消息
       //ToDo
     }else if (toUser) {
       //更新会话列表
-      await this.conversationService.insert(
+      const conversation = await this.conversationService.insertOrUpdate(
         {
-          user: message.from,
-          contact: toUser._id,
+          user: user._id,
+          to: message.to,
+          name: toUser.name,
           message: message.content
         })
 
+      const toConversation = await this.conversationService.insertOrUpdate(
+        {
+          user: toUser._id,
+          to: message.to,
+          name: user.name,
+          message: message.content
+        })
       //发送消息
-      const target = await this.cacheManager.get(message.to)
-      this.ctx.to(target.toString()).emit('sendMsg',message)
+      console.log(conversation)
+      console.log(toConversation)
+      const target = await this.cacheManager.get(toUser._id.toString())
+      if (target !== undefined) {
+        this.ctx.to(target.toString()).emit('sendMsg', {message: message, conversation: toConversation})
+      }
+      this.ctx.emit('sendMsg', {message: message, conversation: conversation})
     }
-    console.log(msg)
 
   }
 }

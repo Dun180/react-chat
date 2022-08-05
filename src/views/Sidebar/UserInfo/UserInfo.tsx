@@ -8,7 +8,7 @@ const UserInfo = (props: any) => {
 
     return(
         <div>
-            <div>id:{userInfo.value.id}</div>
+            <div>id:{userInfo.value._id}</div>
             <div>name:{userInfo.value.name}</div>
 
         </div>

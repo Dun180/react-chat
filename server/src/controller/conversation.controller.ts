@@ -12,7 +12,7 @@ export class ConversationController {
 
   @Post('/add')
   async addConversation(@Body() conversation: Conversation) {
-    return Result.succ(await this.conversationService.insert(conversation))
+    return Result.succ(await this.conversationService.insertOrUpdate(conversation))
   }
 
   @Get('/query')

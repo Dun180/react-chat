@@ -39,7 +39,7 @@ export class UserService {
   }
 
   async selectOne(id: string) {
-    return await this.userModel.findOne({id: id}).exec();
+    return await this.userModel.findOne({_id: id}).exec();
   }
 
   async selectByName(name: string) {

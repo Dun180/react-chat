@@ -2,7 +2,6 @@ import {EntityModel} from "@midwayjs/typegoose";
 import mongoose from "mongoose";
 import { prop, Ref } from '@typegoose/typegoose'
 import {User} from "./user";
-import {Group} from "./group";
 
 @EntityModel()
 export class Conversation {
@@ -16,16 +15,16 @@ export class Conversation {
   public user?: Ref<User>;
 
   /**
-   * 联系人
+   * 群聊: 群id, 私聊: 两人id拼接, 按字符串比较, 小的在前
    */
-  @prop({ref: () => User})
-  public contact?: Ref<User>;
+  @prop({index: true, required: true})
+  public to?: string;
 
   /**
-   * 群组
+   * 会话目标名称
    */
-  @prop({ref: () => Group})
-  public group?: Ref<Group>;
+  @prop({required: true})
+  public name?: string;
 
   /**
    * 最新一条信息
@@ -38,4 +37,5 @@ export class Conversation {
    */
   @prop({default: new Date().getTime()})
   public updateTime?: number;
+
 }

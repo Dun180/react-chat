@@ -2,11 +2,12 @@ import React, {useState} from "react";
 import style from "./ContactList.module.scss"
 import {Avatar, message, Tabs} from 'antd';
 import {UserOutlined} from "@ant-design/icons";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {User} from "@/models/interface";
 import useAsyncEffect from "use-async-effect";
 import {addConversation, queryFriend} from "@/lib/api";
 import {useNavigate} from "react-router-dom";
+import {SET_CURRENT_CONVERSATION} from "@/store/reducers/currentConversation";
 
 
 const ContactList = () => {
@@ -14,7 +15,7 @@ const ContactList = () => {
     const userInfo = useSelector((state: any) => state.userInfo.value)
     const [friendList, setFriendList] = useState([] as User[])
     const navigate = useNavigate()
-
+    const dispatch = useDispatch()
     useAsyncEffect(async () => {
         const resp = await queryFriend(userInfo._id)
         if (resp.code === 200){
@@ -28,11 +29,12 @@ const ContactList = () => {
     const handleAddConversation = async (contact: string) => {
         const data = {
             user: userInfo._id,
-            contact: contact,
+            to: userInfo._id > contact? contact + userInfo._id: userInfo._id + contact,
         }
         const resp = await addConversation(data)
         if (resp.code === 200) {
-
+            console.log(resp)
+            dispatch(SET_CURRENT_CONVERSATION({_id: resp.data._id, to: resp.data.to}))
             navigate('/conversation')
         }else {
             message.error(resp.msg)

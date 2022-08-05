@@ -11,8 +11,8 @@ export interface User {
 export interface Conversation {
     _id?: string;
     user?: string;
-    contact?: string;
-    group?: string;
+    to?: string;
+    name?: string;
     message?: string;
     updateTime?: number;
 }

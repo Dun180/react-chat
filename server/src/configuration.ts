@@ -13,6 +13,7 @@ import { ReportMiddleware } from './middleware/report.middleware';
 // import { FormatMiddleware } from './middleware/format.middleware';
 import { ErrorResponseMiddleware } from "./middleware/errorResponse.middleware";
 import { JwtMiddleware } from "./middleware/jwt.middleware";
+import {SocketErrorMiddleware} from "./middleware/socketError.middleware";
 
 @Configuration({
   imports: [
@@ -33,16 +34,21 @@ export class ContainerLifeCycle {
   @App()
   app: koa.Application;
 
+  @App('socketIO')
+  socketApp: socketio.Application;
   async onReady() {
     // add middleware
     this.app.useMiddleware([
       ReportMiddleware,
       // FormatMiddleware,
       // ErrorResponseMiddleware,
-      JwtMiddleware
+      JwtMiddleware,
     ]);
     this.app.getMiddleware().insertFirst(ErrorResponseMiddleware);
     // add filter
     // this.app.useFilter([NotFoundFilter, DefaultErrorFilter]);
+    this.socketApp.useMiddleware([
+      SocketErrorMiddleware,
+    ])
   }
 }

@@ -8,7 +8,7 @@ const messageList = createSlice({
     initialState,
     reducers: {
         SET_MESSAGE_LIST:(state, {payload}) => {
-            state = payload
+            return payload
         },
 
         ADD_MESSAGE:(state:Message[] | null, {payload}) => {
@@ -17,5 +17,5 @@ const messageList = createSlice({
     }
 })
 
-export const { SET_MESSAGE_LIST } = messageList.actions
+export const { SET_MESSAGE_LIST, ADD_MESSAGE } = messageList.actions
 export default messageList

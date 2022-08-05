@@ -17,7 +17,7 @@ export class FriendService {
 
   async insert(friend: Friend){
     const findRes = await this.friendModel.find({from: friend.from, to: friend.to}).exec()
-    assert(!findRes,'好友已添加')
+    assert(!findRes.length,'好友已添加')
     if (friend.from === friend.to) {
       throw new Error('不能添加自己为好友')
     }

@@ -25,7 +25,7 @@ const Login = (props:any) => {
             const token = resp.headers['authorization']
             const userInfo = resp.data.data
             message.success('登录成功');
-            await loginEvent(userInfo.id)
+            await loginEvent(userInfo._id)
             // navigate('/')
             props.close()
             dispatch(SET_USERINFO(userInfo))
