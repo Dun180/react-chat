@@ -6,6 +6,7 @@ import useAsyncEffect from "use-async-effect";
 import {queryMessage, sendMsg} from "@/lib/api";
 import {SET_MESSAGE_LIST} from "@/store/reducers/messageList";
 import {Message} from "@/models/interface";
+import Dialog from "@/views/Chat/Dialog/Dialog";
 
 const Chat = () => {
     const { TextArea } = Input;
@@ -46,12 +47,11 @@ const Chat = () => {
             <div className={style.chat_box}>
                 <div className={style.chat_top}></div>
                 <div className={style.chat_content}>
-                    <div>222</div>
                     {
                         messageList?.map((message: Message) => {
                             return (
                                 <div key={message._id}>
-                                    111 {message.content}
+                                    <Dialog message={message.content} isSender={message.from === userInfo._id}/>
                                 </div>
                             )
                         })

@@ -1,0 +1,15 @@
+.dialog_container {
+  width: 100%;
+  height: 80px;
+}
+
+.left_dialog {
+
+}
+
+
+.right_dialog {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
